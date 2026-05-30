@@ -1,0 +1,25 @@
+@url = https://localhost:7221
+
+### 1. KROK: Vytvorenie tabuliek a testovacích dát
+POST {{url}}/dev/seed
+
+### 2. KROK: Získanie všetkých jedál
+GET {{url}}/api/meals
+
+### 3. KROK: Pridanie nového jedla (pre Vedenie menzy)
+POST {{url}}/api/meals
+Content-Type: application/json
+
+{
+  "name": "Sviečková na smotane",
+  "description": "Klasická sviečková s domácou knedľou",
+  "price": 150
+}
+
+### 4. KROK: Objednanie jedla študentom (musíš zistiť ID menuItem z databázy)
+POST {{url}}/api/orders
+Content-Type: application/json
+
+{
+  "menuItemId": 1
+}

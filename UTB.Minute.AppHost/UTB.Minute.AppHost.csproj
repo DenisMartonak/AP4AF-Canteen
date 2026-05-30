@@ -1,0 +1,23 @@
+﻿<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>7002024c-38cf-4702-9634-5a0e692b4b83</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.2.2" />
+	<PackageReference Include="Aspire.Hosting.AppHost" Version="13.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UTB.Minute.AdminClient\UTB.Minute.AdminClient.csproj" />
+    <ProjectReference Include="..\UTB.Minute.CanteenClient\UTB.Minute.CanteenClient.csproj" />
+    <ProjectReference Include="..\UTB.Minute.DbManager\UTB.Minute.DbManager.csproj" />
+    <ProjectReference Include="..\UTB.Minute.WebApi\UTB.Minute.WebApi.csproj" />
+  </ItemGroup>
+
+</Project>

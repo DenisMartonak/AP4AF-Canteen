@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="UTB.Minute.AdminClient/UTB.Minute.AdminClient.csproj" />
+  <Project Path="UTB.Minute.AppHost/UTB.Minute.AppHost.csproj" />
+  <Project Path="UTB.Minute.CanteenClient/UTB.Minute.CanteenClient.csproj" />
+  <Project Path="UTB.Minute.Contracts/UTB.Minute.Contracts.csproj" />
+  <Project Path="UTB.Minute.Db/UTB.Minute.Db.csproj" />
+  <Project Path="UTB.Minute.DbManager/UTB.Minute.DbManager.csproj" Id="a960585a-9bc4-4998-b45f-133ce2a9bd90" />
+  <Project Path="UTB.Minute.WebApi.Tests/UTB.Minute.WebApi.Tests.csproj" />
+  <Project Path="UTB.Minute.WebApi/UTB.Minute.WebApi.csproj" />
+</Solution>
