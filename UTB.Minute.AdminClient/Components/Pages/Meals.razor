@@ -1,0 +1,147 @@
+@page "/meals"
+@attribute [Authorize(Roles = "admin")]
+@inject ApiClient Api
+
+<h3>Správa jídel</h3>
+
+<div class="row mb-3">
+    <div class="col-md-4">
+        <h4>Nové jídlo</h4>
+        <EditForm Model="newMeal" OnValidSubmit="CreateMeal">
+            <DataAnnotationsValidator />
+            <div class="mb-2">
+                <label>Název</label>
+                <InputText class="form-control" @bind-Value="newMeal.Name" />
+            </div>
+            <div class="mb-2">
+                <label>Popis</label>
+                <InputText class="form-control" @bind-Value="newMeal.Description" />
+            </div>
+            <div class="mb-2">
+                <label>Cena</label>
+                <InputNumber class="form-control" @bind-Value="newMeal.Price" />
+            </div>
+            <button type="submit" class="btn btn-primary">Vytvořit</button>
+        </EditForm>
+    </div>
+    <div class="col-md-8">
+        <h4>Seznam jídel</h4>
+        @if (meals == null)
+        {
+            <p>Načítám...</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Název</th>
+                        <th>Popis</th>
+                        <th>Cena</th>
+                        <th>Aktivní</th>
+                        <th>Akce</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in meals)
+                    {
+                        <tr>
+                            <td>@m.Id</td>
+                            <td>@m.Name</td>
+                            <td>@m.Description</td>
+                            <td>@m.Price</td>
+                            <td>
+                                <input type="checkbox" checked="@m.IsActive" @onchange="@(e => ToggleActive(m, (bool)(e.Value ?? false)))" />
+                            </td>
+                            <td>
+                                
+                                <button class="btn btn-sm btn-secondary" @onclick="() => Edit(m)">Upravit</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+@if (editMeal != null)
+{
+    <h4>Úprava jídla @editMeal.Name</h4>
+    <EditForm Model="editMeal" OnValidSubmit="UpdateMeal">
+        <div class="mb-2">
+            <label>Název</label>
+            <InputText class="form-control" @bind-Value="editMeal.Name" />
+        </div>
+        <div class="mb-2">
+            <label>Popis</label>
+            <InputText class="form-control" @bind-Value="editMeal.Description" />
+        </div>
+        <div class="mb-2">
+            <label>Cena</label>
+            <InputNumber class="form-control" @bind-Value="editMeal.Price" />
+        </div>
+        <button type="submit" class="btn btn-success">Uložit</button>
+        <button type="button" class="btn btn-secondary" @onclick="CancelEdit">Zrušit</button>
+    </EditForm>
+}
+
+@code {
+    private MealDto[]? meals;
+    private MealViewModel newMeal = new();
+    private MealViewModel? editMeal;
+    private int editMealId;
+
+    class MealViewModel
+    {
+        public string Name { get; set; } = "";
+        public string Description { get; set; } = "";
+        public decimal Price { get; set; }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMeals();
+    }
+
+    private async Task LoadMeals()
+    {
+        meals = await Api.GetMealsAsync();
+    }
+
+    private async Task CreateMeal()
+    {
+        await Api.CreateMealAsync(new MealRequestDto(newMeal.Name, newMeal.Description, newMeal.Price));
+        newMeal = new();
+        await LoadMeals();
+    }
+
+    private async Task ToggleActive(MealDto meal, bool active)
+    {
+        await Api.PatchMealActiveAsync(meal.Id, new MealPatchActiveDto(active));
+        await LoadMeals();
+    }
+
+    private void Edit(MealDto meal)
+    {
+        editMealId = meal.Id;
+        editMeal = new MealViewModel { Name = meal.Name, Description = meal.Description, Price = meal.Price };
+    }
+
+    private async Task UpdateMeal()
+    {
+        if (editMeal != null)
+        {
+            await Api.UpdateMealAsync(editMealId, new MealPutRequestDto(editMeal.Name, editMeal.Description, editMeal.Price));
+            editMeal = null;
+            await LoadMeals();
+        }
+    }
+
+    private void CancelEdit()
+    {
+        editMeal = null;
+    }
+}
+

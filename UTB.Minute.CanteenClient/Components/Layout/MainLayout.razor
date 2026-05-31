@@ -1,9 +1,46 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
 
-@Body
+<div class="page">
+    <header class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">UTB Minute Canteen</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="" Match="NavLinkMatch.All">Menu pro studenty</NavLink>
+                    </li>
+                    <AuthorizeView Roles="cook,admin">
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="cook">Kuchařka (Objednávky)</NavLink>
+                        </li>
+                    </AuthorizeView>
+                </ul>
+                <div class="d-flex">
+                    <AuthorizeView>
+                        <Authorized>
+                            <span class="navbar-text me-3 text-white">@context.User.Identity?.Name</span>
+                            <form action="/logout" method="post">
+                                <AntiforgeryToken />
+                                <button type="submit" class="btn btn-outline-light">Odhlásit</button>
+                            </form>
+                        </Authorized>
+                        <NotAuthorized>
+                            <a href="/login" class="btn btn-outline-light">Přihlásit</a>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        @Body
+    </main>
+</div>
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+

@@ -1,0 +1,149 @@
+@page "/menu"
+@attribute [Authorize(Roles = "admin")]
+@inject ApiClient Api
+
+<h3>Správa menu</h3>
+
+<div class="row mb-3">
+    <div class="col-md-4">
+        <h4>Nová položka menu</h4>
+        <EditForm Model="newItem" OnValidSubmit="CreateMenuItem">
+            <div class="mb-2">
+                <label>Datum</label>
+                <InputDate class="form-control" @bind-Value="newItem.Date" />
+            </div>
+            <div class="mb-2">
+                <label>Jídlo</label>
+                <InputSelect class="form-select" @bind-Value="newItem.MealId">
+                    <option value="0">-- Vyberte jídlo --</option>
+                    @if (meals != null)
+                    {
+                        foreach (var m in meals.Where(x => x.IsActive))
+                        {
+                            <option value="@m.Id">@m.Name (@m.Price Kč)</option>
+                        }
+                    }
+                </InputSelect>
+            </div>
+            <div class="mb-2">
+                <label>Počet porcí</label>
+                <InputNumber class="form-control" @bind-Value="newItem.AvailablePortions" />
+            </div>
+            <button type="submit" class="btn btn-primary" disabled="@(newItem.MealId == 0)">Vytvořit</button>
+        </EditForm>
+    </div>
+    <div class="col-md-8">
+        <h4>Seznam položek v menu</h4>
+        @if (menuItems == null)
+        {
+            <p>Načítám...</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Datum</th>
+                        <th>Jídlo</th>
+                        <th>Porce</th>
+                        <th>Akce</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in menuItems.OrderByDescending(x => x.Date))
+                    {
+                        <tr>
+                            <td>@m.Id</td>
+                            <td>@m.Date.ToShortDateString()</td>
+                            <td>@m.MealName</td>
+                            <td>@m.AvailablePortions</td>
+                            <td>
+                                <button class="btn btn-sm btn-secondary" @onclick="() => Edit(m)">Upravit</button>
+                                <button class="btn btn-sm btn-danger" @onclick="() => Delete(m.Id)">Smazat</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+@if (editItem != null)
+{
+    <h4>Úprava položky menu ID @editItemId</h4>
+    <EditForm Model="editItem" OnValidSubmit="UpdateMenuItem">
+        <div class="mb-2">
+            <label>Datum</label>
+            <InputDate class="form-control" @bind-Value="editItem.Date" />
+        </div>
+        <div class="mb-2">
+            <label>Počet porcí</label>
+            <InputNumber class="form-control" @bind-Value="editItem.AvailablePortions" />
+        </div>
+        <button type="submit" class="btn btn-success">Uložit</button>
+        <button type="button" class="btn btn-secondary" @onclick="CancelEdit">Zrušit</button>
+    </EditForm>
+}
+
+@code {
+    private MenuItemDto[]? menuItems;
+    private MealDto[]? meals;
+    private MenuItemViewModel newItem = new();
+    private MenuItemViewModel? editItem;
+    private int editItemId;
+
+    class MenuItemViewModel
+    {
+        public DateOnly Date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+        public int MealId { get; set; }
+        public int AvailablePortions { get; set; } = 10;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        menuItems = await Api.GetMenuItemsAsync();
+        meals = await Api.GetMealsAsync();
+    }
+
+    private async Task CreateMenuItem()
+    {
+        await Api.CreateMenuItemAsync(new MenuItemRequestDto(newItem.Date, newItem.MealId, newItem.AvailablePortions));
+        newItem = new();
+        await LoadData();
+    }
+
+    private void Edit(MenuItemDto item)
+    {
+        editItemId = item.Id;
+        editItem = new MenuItemViewModel { Date = item.Date, MealId = item.MealId, AvailablePortions = item.AvailablePortions };
+    }
+
+    private async Task UpdateMenuItem()
+    {
+        if (editItem != null)
+        {
+            await Api.UpdateMenuItemAsync(editItemId, new MenuItemPutRequestDto(editItem.Date, editItem.AvailablePortions));
+            editItem = null;
+            await LoadData();
+        }
+    }
+
+    private async Task Delete(int id)
+    {
+        await Api.DeleteMenuItemAsync(id);
+        await LoadData();
+    }
+
+    private void CancelEdit()
+    {
+        editItem = null;
+    }
+}
+

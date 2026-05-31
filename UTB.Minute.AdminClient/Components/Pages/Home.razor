@@ -1,7 +1,31 @@
-﻿@page "/"
+@page "/"
+@using Microsoft.AspNetCore.Components.Authorization
 
-<PageTitle>Home</PageTitle>
+<PageTitle>UTB Minute Admin</PageTitle>
 
-<h1>Hello, world!</h1>
+<AuthorizeView>
+    <Authorized>
+        <div class="container mt-5">
+            <div class="p-5 mb-4 bg-light rounded-3 shadow-sm border">
+                <div class="container-fluid py-5">
+                    <h1 class="display-5 fw-bold">Vítejte v administraci</h1>
+                    <p class="col-md-8 fs-4 text-muted">Zde můžete spravovat denní menu a katalog nabízených jídel pro menzu.</p>
+                    <div class="mt-4">
+                        <a href="/menu" class="btn btn-primary btn-lg me-3">Spravovat Menu</a>
+                        <a href="/meals" class="btn btn-outline-secondary btn-lg">Katalog jídel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="container mt-5 text-center">
+            <div class="py-5">
+                <h1 class="display-4 fw-bold mb-4">UTB Minute Administrace</h1>
+                <p class="fs-4 text-muted mb-5">Pro přístup do administrativního rozhraní je vyžadováno přihlášení.</p>
+                <a href="/login" class="btn btn-primary btn-lg px-5 py-3 fs-5 shadow">Přihlásit se jako administrátor</a>
+            </div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
 
-Welcome to your new app.

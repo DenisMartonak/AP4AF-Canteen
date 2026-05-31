@@ -1,0 +1,136 @@
+@page "/cook"
+@using System.Net.ServerSentEvents
+@using System.Text.Json
+@using UTB.Minute.Contracts
+@implements IAsyncDisposable
+@attribute [Authorize(Roles = "cook,admin")]
+@inject IHttpClientFactory ClientFactory
+@inject ApiClient Api
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<PageTitle>Kuchařka - Objednávky</PageTitle>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+<h3>Nedokončené objednávky</h3>
+
+@if (canteenState is null)
+{
+    <p><em>Načítám...</em></p>
+}
+else
+{
+    <div class="row">
+        @foreach (var order in canteenState.Orders.Where(o => o.State != "Completed" && o.State != "Cancelled").OrderBy(o => o.Id))
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">#@order.Id - @order.MealName</h5>
+                        <p class="card-text">
+                            Stav: <span class="badge @GetBadgeClass(order.State)">@GetStateText(order.State)</span>
+                        </p>
+                        <div class="btn-group w-100">
+                            @if (order.State == "Preparing")
+                            {
+                                <button class="btn btn-success" @onclick="@(() => ChangeState(order.Id, "Ready"))">Označit jako Hotová</button>
+                                <button class="btn btn-danger" @onclick="@(() => ChangeState(order.Id, "Cancelled"))">Zrušit</button>
+                            }
+                            else if (order.State == "Ready")
+                            {
+                                <button class="btn btn-primary" @onclick="@(() => ChangeState(order.Id, "Completed"))">Vydat (Dokončená)</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (!canteenState.Orders.Any(o => o.State != "Completed" && o.State != "Cancelled"))
+        {
+            <div class="col-12">
+                <p class="text-muted">Žádné nedokončené objednávky.</p>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private CancellationTokenSource cts = new();
+    private CanteenStateDto? canteenState;
+    private string? errorMessage;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _ = StartSseAsync(cts.Token);
+        }
+    }
+
+    private async Task ChangeState(int orderId, string newState)
+    {
+        errorMessage = null;
+        try
+        {
+            await Api.PatchOrderStateAsync(orderId, new OrderStatePatchDto(newState));
+        }
+        catch (HttpRequestException ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+
+    private async Task StartSseAsync(CancellationToken ct)
+    {
+        var client = ClientFactory.CreateClient("api"); 
+
+        try
+        {
+            using var response = await client.GetAsync("/api/sse", HttpCompletionOption.ResponseHeadersRead, ct);
+            response.EnsureSuccessStatusCode();
+            using Stream sseStream = await response.Content.ReadAsStreamAsync(ct);
+            SseParser<string> parser = SseParser.Create(sseStream);
+
+            await foreach (SseItem<string> sseEvent in parser.EnumerateAsync(ct))
+            {
+                canteenState = JsonSerializer.Deserialize<CanteenStateDto>(sseEvent.Data, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+        catch (HttpRequestException)
+        {
+            errorMessage = "Nepodařilo se připojit k serveru.";
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException)
+        {
+            
+        }
+    }
+
+    private string GetBadgeClass(string state) => state switch
+    {
+        "Preparing" => "bg-warning text-dark",
+        "Ready" => "bg-success",
+        _ => "bg-secondary"
+    };
+
+    private string GetStateText(string state) => state switch
+    {
+        "Preparing" => "Připravuje se",
+        "Ready" => "Hotová",
+        "Cancelled" => "Zrušená",
+        "Completed" => "Dokončená",
+        _ => state
+    };
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        cts.Cancel();
+        cts.Dispose();
+    }
+}
+

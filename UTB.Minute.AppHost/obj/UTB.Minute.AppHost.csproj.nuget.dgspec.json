@@ -54,21 +54,26 @@
           "dependencies": {
             "Aspire.Dashboard.Sdk.win-x64": {
               "target": "Package",
-              "version": "[13.2.2, )",
+              "version": "[13.3.0, )",
               "autoReferenced": true
             },
             "Aspire.Hosting.AppHost": {
               "target": "Package",
-              "version": "[13.2.2, )"
+              "version": "[13.3.0, )",
+              "autoReferenced": true
+            },
+            "Aspire.Hosting.Keycloak": {
+              "target": "Package",
+              "version": "[13.3.0-preview.1.26256.5, )"
             },
             "Aspire.Hosting.Orchestration.win-x64": {
               "target": "Package",
-              "version": "[13.2.2, )",
+              "version": "[13.3.0, )",
               "autoReferenced": true
             },
             "Aspire.Hosting.PostgreSQL": {
               "target": "Package",
-              "version": "[13.2.2, )"
+              "version": "[13.3.0, )"
             }
           },
           "imports": [

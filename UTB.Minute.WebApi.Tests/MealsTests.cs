@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Net.Http.Json;
 using UTB.Minute.Contracts;
 
@@ -40,6 +40,14 @@ public class MealsTests(TestFixture fixture)
         var response = await fixture.HttpClient.PutAsJsonAsync($"/api/meals/{created!.Id}", updateRequest);
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+        
+        var getRes = await fixture.HttpClient.GetAsync("/api/meals");
+        var meals = await getRes.Content.ReadFromJsonAsync<MealDto[]>();
+        var updatedMeal = meals!.First(m => m.Id == created!.Id);
+        
+        Assert.Equal("Nové", updatedMeal.Name);
+        Assert.Equal("Upravený popis", updatedMeal.Description);
+        Assert.Equal(110, updatedMeal.Price);
     }
 
     [Fact]
@@ -52,5 +60,23 @@ public class MealsTests(TestFixture fixture)
         var response = await fixture.HttpClient.PatchAsJsonAsync($"/api/meals/{created!.Id}", patchRequest);
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+
+        var getRes = await fixture.HttpClient.GetAsync("/api/meals");
+        var meals = await getRes.Content.ReadFromJsonAsync<MealDto[]>();
+        var patchedMeal = meals!.First(m => m.Id == created!.Id);
+        
+        Assert.False(patchedMeal.IsActive);
+    }
+
+    [Fact]
+    public async Task CreateMeal_NegativePriceOrMissingName_ReturnsBadRequest()
+    {
+        var request = new MealRequestDto("", "Chybí jméno", 100);
+        var response = await fixture.HttpClient.PostAsJsonAsync("/api/meals", request);
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+
+        var request2 = new MealRequestDto("Jméno", "Popis", -50);
+        var response2 = await fixture.HttpClient.PostAsJsonAsync("/api/meals", request2);
+        Assert.Equal(HttpStatusCode.BadRequest, response2.StatusCode);
     }
 }

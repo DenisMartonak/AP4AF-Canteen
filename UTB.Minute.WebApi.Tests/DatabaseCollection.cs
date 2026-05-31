@@ -1,4 +1,4 @@
-﻿using Xunit;
+using Xunit;
 
 namespace UTB.Minute.WebApi.Tests;
 

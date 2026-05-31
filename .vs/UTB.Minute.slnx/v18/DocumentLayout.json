@@ -7,12 +7,28 @@
       "RelativeMoniker": "D:0:0:{4A87D34D-272C-9081-B09B-18B67F64FD11}|UTB.Minute.CanteenClient\\UTB.Minute.CanteenClient.csproj|solutionrelative:utb.minute.canteenclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{952A2B5B-B2F6-3357-FB7C-2EAEBAFF603D}|UTB.Minute.AppHost\\UTB.Minute.AppHost.csproj|c:\\users\\dmart\\downloads\\pulsemestralni_projekt_sik_martonak\\utb.minute.apphost\\apphost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{952A2B5B-B2F6-3357-FB7C-2EAEBAFF603D}|UTB.Minute.AppHost\\UTB.Minute.AppHost.csproj|solutionrelative:utb.minute.apphost\\apphost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{511397AE-D3AA-C293-AD1F-7F0314A4111B}|UTB.Minute.WebApi\\UTB.Minute.WebApi.csproj|c:\\users\\dmart\\downloads\\pulsemestralni_projekt_sik_martonak\\utb.minute.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{511397AE-D3AA-C293-AD1F-7F0314A4111B}|UTB.Minute.WebApi\\UTB.Minute.WebApi.csproj|solutionrelative:utb.minute.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A87D34D-272C-9081-B09B-18B67F64FD11}|UTB.Minute.CanteenClient\\UTB.Minute.CanteenClient.csproj|c:\\users\\dmart\\downloads\\pulsemestralni_projekt_sik_martonak\\utb.minute.canteenclient\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4A87D34D-272C-9081-B09B-18B67F64FD11}|UTB.Minute.CanteenClient\\UTB.Minute.CanteenClient.csproj|solutionrelative:utb.minute.canteenclient\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A87D34D-272C-9081-B09B-18B67F64FD11}|UTB.Minute.CanteenClient\\UTB.Minute.CanteenClient.csproj|c:\\users\\dmart\\downloads\\pulsemestralni_projekt_sik_martonak\\utb.minute.canteenclient\\components\\pages\\cookview.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4A87D34D-272C-9081-B09B-18B67F64FD11}|UTB.Minute.CanteenClient\\UTB.Minute.CanteenClient.csproj|solutionrelative:utb.minute.canteenclient\\components\\pages\\cookview.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F0D3CA16-E083-CD9E-AB30-575DD500C512}|UTB.Minute.Db\\UTB.Minute.Db.csproj|c:\\users\\dmart\\downloads\\pulsemestralni_projekt_sik_martonak\\utb.minute.db\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F0D3CA16-E083-CD9E-AB30-575DD500C512}|UTB.Minute.Db\\UTB.Minute.Db.csproj|solutionrelative:utb.minute.db\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0D3CA16-E083-CD9E-AB30-575DD500C512}|UTB.Minute.Db\\UTB.Minute.Db.csproj|c:\\users\\dmart\\downloads\\pulsemestralni_projekt_sik_martonak\\utb.minute.db\\menuitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F0D3CA16-E083-CD9E-AB30-575DD500C512}|UTB.Minute.Db\\UTB.Minute.Db.csproj|solutionrelative:utb.minute.db\\menuitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{952A2B5B-B2F6-3357-FB7C-2EAEBAFF603D}|UTB.Minute.AppHost\\UTB.Minute.AppHost.csproj|c:\\users\\dmart\\downloads\\pulsemestralni_projekt_sik_martonak\\utb.minute.apphost\\apphost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{952A2B5B-B2F6-3357-FB7C-2EAEBAFF603D}|UTB.Minute.AppHost\\UTB.Minute.AppHost.csproj|solutionrelative:utb.minute.apphost\\apphost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +38,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.CanteenClient\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "UTB.Minute.CanteenClient\\Components\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.CanteenClient\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "UTB.Minute.CanteenClient\\Components\\Pages\\Home.razor",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAEsAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-30T14:43:08.633Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CookView.razor",
+              "DocumentMoniker": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.CanteenClient\\Components\\Pages\\CookView.razor",
+              "RelativeDocumentMoniker": "UTB.Minute.CanteenClient\\Components\\Pages\\CookView.razor",
+              "ToolTip": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.CanteenClient\\Components\\Pages\\CookView.razor",
+              "RelativeToolTip": "UTB.Minute.CanteenClient\\Components\\Pages\\CookView.razor",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAnwFUAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-30T14:43:00.555Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.WebApi\\Program.cs",
+              "RelativeDocumentMoniker": "UTB.Minute.WebApi\\Program.cs",
+              "ToolTip": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.WebApi\\Program.cs",
+              "RelativeToolTip": "UTB.Minute.WebApi\\Program.cs",
+              "ViewState": "AgIAAMUAAAAAAAAAAAAAAM8AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-30T10:26:11.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MenuItem.cs",
+              "DocumentMoniker": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.Db\\MenuItem.cs",
+              "RelativeDocumentMoniker": "UTB.Minute.Db\\MenuItem.cs",
+              "ToolTip": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.Db\\MenuItem.cs",
+              "RelativeToolTip": "UTB.Minute.Db\\MenuItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-30T10:22:38.05Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -32,14 +96,14 @@
               "RelativeDocumentMoniker": "UTB.Minute.CanteenClient\\Program.cs",
               "ToolTip": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.CanteenClient\\Program.cs",
               "RelativeToolTip": "UTB.Minute.CanteenClient\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABfAAAAAAAAAA==",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAawIUAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-30T10:16:33.505Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "AppHost.cs",
               "DocumentMoniker": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.AppHost\\AppHost.cs",
               "RelativeDocumentMoniker": "UTB.Minute.AppHost\\AppHost.cs",
@@ -47,21 +111,19 @@
               "RelativeToolTip": "UTB.Minute.AppHost\\AppHost.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-30T10:12:31.258Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-30T10:12:31.258Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "DbContext.cs",
               "DocumentMoniker": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.Db\\DbContext.cs",
               "RelativeDocumentMoniker": "UTB.Minute.Db\\DbContext.cs",
               "ToolTip": "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.Db\\DbContext.cs",
               "RelativeToolTip": "UTB.Minute.Db\\DbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-30T10:11:52.458Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-30T10:11:52.458Z"
             }
           ]
         }

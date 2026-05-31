@@ -1,7 +1,156 @@
-﻿@page "/"
+@page "/"
+@using System.Net.ServerSentEvents
+@using System.Text.Json
+@using UTB.Minute.Contracts
+@implements IAsyncDisposable
+@inject IHttpClientFactory ClientFactory
+@inject ApiClient Api
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Menu pro studenty</PageTitle>
 
-<h1>Hello, world!</h1>
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
 
-Welcome to your new app.
+<div class="row">
+    <div class="col-md-7">
+        <h3>Aktuální nabídka</h3>
+        @if (canteenState is null)
+        {
+            <p><em>Načítám...</em></p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Jídlo</th>
+                        <th>Cena</th>
+                        <th>Dostupné porce</th>
+                        <th>Akce</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in canteenState.MenuItems.Where(m => m.Date == DateOnly.FromDateTime(DateTime.Now)).OrderBy(m => m.Id))
+                    {
+                        <tr class="@(item.AvailablePortions <= 0 ? "table-danger text-muted" : "")">
+                            <td>@item.MealName</td>
+                            <td>@item.Price Kč</td>
+                            <td>@item.AvailablePortions</td>
+                            <td>
+                                <button class="btn btn-primary" disabled="@(item.AvailablePortions <= 0)" @onclick="() => OrderMeal(item.Id)">
+                                    Objednat
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+    
+    <div class="col-md-5">
+        <h3>Stav objednávek</h3>
+        @if (canteenState is null)
+        {
+            <p><em>Načítám...</em></p>
+        }
+        else
+        {
+            <ul class="list-group">
+                @foreach (var order in canteenState.Orders.Where(o => o.State != "Completed" && o.State != "Cancelled"))
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Objednávka #@order.Id - @order.MealName
+                        <span class="badge @GetBadgeClass(order.State) rounded-pill">@GetStateText(order.State)</span>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>
+
+@code {
+    private CancellationTokenSource cts = new();
+    private CanteenStateDto? canteenState;
+    private string? errorMessage;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _ = StartSseAsync(cts.Token);
+        }
+    }
+
+    private async Task OrderMeal(int menuItemId)
+    {
+        errorMessage = null;
+        try
+        {
+            var client = await Api.GetClientAsync();
+            var response = await client.PostAsJsonAsync("/api/orders", new OrderRequestDto(menuItemId));
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Chyba při objednávání: " + ex.Message;
+        }
+    }
+
+    private async Task StartSseAsync(CancellationToken ct)
+    {
+        var client = ClientFactory.CreateClient("api"); 
+
+        try
+        {
+            using var response = await client.GetAsync("/api/sse", HttpCompletionOption.ResponseHeadersRead, ct);
+            response.EnsureSuccessStatusCode();
+            using Stream sseStream = await response.Content.ReadAsStreamAsync(ct);
+            SseParser<string> parser = SseParser.Create(sseStream);
+
+            await foreach (SseItem<string> sseEvent in parser.EnumerateAsync(ct))
+            {
+                canteenState = JsonSerializer.Deserialize<CanteenStateDto>(sseEvent.Data, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+        catch (HttpRequestException)
+        {
+            errorMessage = "Nepodařilo se připojit k serveru.";
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException)
+        {
+            
+        }
+    }
+
+    private string GetBadgeClass(string state) => state switch
+    {
+        "Preparing" => "bg-warning text-dark",
+        "Ready" => "bg-success",
+        _ => "bg-secondary"
+    };
+
+    private string GetStateText(string state) => state switch
+    {
+        "Preparing" => "Připravuje se",
+        "Ready" => "Hotová",
+        "Cancelled" => "Zrušená",
+        "Completed" => "Dokončená",
+        _ => state
+    };
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        cts.Cancel();
+        cts.Dispose();
+    }
+}
+

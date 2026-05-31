@@ -1,4 +1,4 @@
-﻿namespace UTB.Minute.Db
+namespace UTB.Minute.Db
 {
     public class Order
     {
@@ -9,3 +9,4 @@
 
     }
 }
+

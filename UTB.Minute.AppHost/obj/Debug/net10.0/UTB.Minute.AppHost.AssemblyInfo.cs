@@ -12,20 +12,20 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("7002024c-38cf-4702-9634-5a0e692b4b83")]
-[assembly: System.Reflection.AssemblyMetadata("dcpclipath", "C:\\Users\\dmart\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.2.2\\tools\\" +
+[assembly: System.Reflection.AssemblyMetadata("dcpclipath", "C:\\Users\\dmart\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.3.0\\tools\\" +
     "dcp.exe")]
-[assembly: System.Reflection.AssemblyMetadata("dcpextensionpaths", "C:\\Users\\dmart\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.2.2\\tools\\" +
+[assembly: System.Reflection.AssemblyMetadata("dcpextensionpaths", "C:\\Users\\dmart\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.3.0\\tools\\" +
     "ext\\")]
 [assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.AppHost")]
 [assembly: System.Reflection.AssemblyMetadata("apphostprojectname", "UTB.Minute.AppHost.csproj")]
-[assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", "C:\\Users\\dmart\\.nuget\\packages\\aspire.dashboard.sdk.win-x64\\13.2.2\\tools\\Aspire.D" +
+[assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", "C:\\Users\\dmart\\.nuget\\packages\\aspire.dashboard.sdk.win-x64\\13.3.0\\tools\\Aspire.D" +
     "ashboard.exe")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("apphostprojectbaseintermediateoutputpath", "C:\\Users\\dmart\\Downloads\\Pulsemestralni_Projekt_Sik_Martonak\\UTB.Minute.AppHost\\o" +
     "bj\\")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("UTB.Minute.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b48aed198a58abba3cd95445b71ba8f5602fd1db")]
 [assembly: System.Reflection.AssemblyProductAttribute("UTB.Minute.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UTB.Minute.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,3 +15,4 @@ namespace UTB.Minute.Db
         public List<MenuItem> MenuItems { get; set; } = [];
     }
 }
+

@@ -747,17 +747,17 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
+            "Aspire.Keycloak.Authentication": {
+              "target": "Package",
+              "version": "[13.3.0-preview.1.26256.5, )"
+            },
             "Aspire.Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[13.2.2, )"
             },
-            "Keycloak.AuthServices.Authentication": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[3.0.0, )"
-            },
-            "Keycloak.AuthServices.Authorization": {
-              "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[10.0.8, )"
             }
           },
           "imports": [

@@ -1,0 +1,12 @@
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\bin\Debug\net10.0\UTB.Minute.Contracts.deps.json
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\bin\Debug\net10.0\UTB.Minute.Contracts.dll
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\bin\Debug\net10.0\UTB.Minute.Contracts.pdb
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\obj\Debug\net10.0\UTB.Minute.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\obj\Debug\net10.0\UTB.Minute.Contracts.AssemblyInfoInputs.cache
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\obj\Debug\net10.0\UTB.Minute.Contracts.AssemblyInfo.cs
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\obj\Debug\net10.0\UTB.Minute.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\obj\Debug\net10.0\UTB.Minute.Contracts.sourcelink.json
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\obj\Debug\net10.0\UTB.Minute.Contracts.dll
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\obj\Debug\net10.0\refint\UTB.Minute.Contracts.dll
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\obj\Debug\net10.0\UTB.Minute.Contracts.pdb
+C:\Users\dmart\Downloads\Pulsemestralni_Projekt_Sik_Martonak\UTB.Minute.Contracts\obj\Debug\net10.0\ref\UTB.Minute.Contracts.dll

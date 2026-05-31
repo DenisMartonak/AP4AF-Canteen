@@ -1,4 +1,4 @@
-ï»¿using Aspire.Hosting;
+using Aspire.Hosting;
 using Aspire.Hosting.Testing;
 using Microsoft.EntityFrameworkCore;
 using UTB.Minute.Db;
@@ -29,7 +29,7 @@ public class TestFixture : IAsyncLifetime
         await context.Database.EnsureDeletedAsync();
         await context.Database.EnsureCreatedAsync();
 
-        var meal = new Meal { Name = "TestovacÃ­ polÃ©vka", Description = "VÃ½var", Price = 40 };
+        var meal = new Meal { Name = "Testovací polévka", Description = "Vývar", Price = 40 };
         context.Meals.Add(meal);
         await context.SaveChangesAsync();
     }

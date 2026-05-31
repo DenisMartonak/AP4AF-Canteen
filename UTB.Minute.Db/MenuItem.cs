@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,5 +14,7 @@ namespace UTB.Minute.Db
         public Meal? Meal { get; set; }
 
         public List<Order> Orders { get; set; } = [];
+        public uint Version { get; set; }
     }
 }
+
